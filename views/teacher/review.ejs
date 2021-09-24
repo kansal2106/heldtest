@@ -1,0 +1,49 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+            <main>
+                <% if (ques.length > 0) { %>
+                    <div class="grids">
+                        <% i = 0 %>
+                        <% for (let q of ques) { %>
+                            <article class="card product-item">
+                                <% i = i+1 %>
+                                <div class="card__content">
+                                    <h2 class="product__price">
+                                        Ques<%= i %>: <%= q.quesDesc %>
+                                    </h2>
+                                </div>
+                                <div>
+                                    <p class="product__description">
+                                        (A): <%= q.optionA %>
+                                    </p>
+                                    <p class="product__description">
+                                        (B): <%= q.optionB %>
+                                    </p>
+                                </div>
+                                <div class="card__actions">
+                                    <a href="/teacher/edit-ques/<%= q._id %>?edit=true" class="btn">Edit</a>
+                                    <form action="/teacher/delete-ques" method="POST">
+                                        <input type="hidden" value="<%= q._id %>" name="quesId">
+                                        <input type="hidden" value="<%= q.test_id %>" name="test_id">
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <button class="btn" type="submit">Delete</button>
+                                    </form>
+
+                                </div>
+                            </article>
+                        <% } %>
+                    </div>
+                    <% } else { %>
+                        <h1>No Question Found!</h1>
+                    <% } %>
+
+                    <div class="card__actions">
+                        <a href="/teacher/add-ques/<%= test_id %>" class="btn">Add Ques</a>
+                    </div>
+            </main>
+            <%- include('../includes/end.ejs') %>

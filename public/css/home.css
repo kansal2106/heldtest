@@ -1,0 +1,11 @@
+.home__welcome {
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    margin: auto;
+    width: 40rem;
+    max-width: 100%;
+    margin-top: 4rem;
+    font-family: 'Courier New', Courier, monospace;
+}

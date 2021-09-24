@@ -1,0 +1,48 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+
+            <main>
+                <% if (ques.length > 0) { %>
+                    <div class="grids">
+                        <% i = 0 %>
+                        <div class="card__actions">
+                            <% let q = ques[0] %>
+                            <form action="/student/testPaper" method="POST">
+                                <% for (let q of ques) { %>
+                                    <article class="card product-item">
+                                        
+                                        <% i = i+1 %>
+                                        <div class="card__content">
+                                            <h2 class="product__price">
+                                                Ques<%= i %>: <%= q.quesDesc %>
+                                            </h2>
+                                        </div>
+                                        <div class="ques__options">
+                                            <p class="product__description">
+                                                <input type="radio" value="A" name="option<%= i %>">
+                                                (A): <%= q.optionA %>
+                                            </p>
+                                            <p class="product__description">
+                                                <input type="radio" value="B" name="option<%= i %>">
+                                                (B): <%= q.optionB %>
+                                            </p>
+                                        </div>
+                                    </article>
+                                <% } %>
+                        
+                                <input type="hidden" value="<%= q.test_id %>" name="test_id">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button class="btn" type="submit">Finish</button>
+                            </form>
+
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <h1>No Question Found!</h1>
+                    <% } %>
+            </main>
+            <%- include('../includes/end.ejs') %>
